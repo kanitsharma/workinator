@@ -1,0 +1,20 @@
+{
+  "name": "workinator",
+  "version": "0.1.0",
+  "main": "index.js",
+  "license": "MIT",
+  "enginite": "1.2.14",
+  "devDependencies": {
+    "@enginite/libstarter": "1.0.2",
+    "@hellpack/eslint-config-hellpack": "^2.2.0",
+    "eslint": "^5.16.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-prettier": "^3.0.1",
+    "prettier": "^1.16.4"
+  },
+  "scripts": {
+    "dev": "en-libstarter dev",
+    "build": "en-libstarter build",
+    "clibuild": "en-libstarter clibuild"
+  }
+}
