@@ -36,7 +36,7 @@ function getNodeWorker(fn, ...args) {
   `;
 }
 
-function createJSFile (string) {
+function createJSFile(string) {
   const blob = new Blob([string.replace('"use strict";', '')]); // eslint-disable-line no-undef
 
   // eslint-disable-next-line no-undef
@@ -66,8 +66,9 @@ function workinator(fn, ...args) {
       const worker = new Worker(functionString, { eval: true });
       worker.on('message', action => {
         resolver(action, resolve, reject);
-        worker.terminate()
+        worker.terminate();
       });
+      worker.on('error', reject);
     });
   }
 
@@ -82,7 +83,8 @@ function workinator(fn, ...args) {
     worker.onmessage = ({ data: action }) => {
       resolver(action, resolve, reject);
     };
-    worker.terminate()
+    worker.onerror = () => reject('There is some error in your worker');
+    worker.terminate();
   });
 }
 
