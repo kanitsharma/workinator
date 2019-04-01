@@ -83,7 +83,7 @@ function workinator(fn, ...args) {
     worker.onmessage = ({ data: action }) => {
       resolver(action, resolve, reject);
     };
-    worker.onerror = () => reject('There is some error in your worker');
+    worker.onerror = () => reject(new Error('There is some error in your worker'));
     worker.terminate();
   });
 }
