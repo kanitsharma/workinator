@@ -7,14 +7,18 @@
   "devDependencies": {
     "@enginite/libstarter": "1.0.2",
     "@hellpack/eslint-config-hellpack": "^2.2.0",
+    "ava": "^1.4.1",
     "eslint": "^5.16.0",
     "eslint-plugin-import": "^2.16.0",
     "eslint-plugin-prettier": "^3.0.1",
+    "parcel-bundler": "^1.12.3",
     "prettier": "^1.16.4"
   },
   "scripts": {
     "dev": "en-libstarter dev",
     "build": "en-libstarter build",
-    "clibuild": "en-libstarter clibuild"
+    "clibuild": "en-libstarter clibuild",
+    "browser_test": "parcel tests/test.html",
+    "test": "ava tests/tests.js"
   }
 }
