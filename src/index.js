@@ -23,10 +23,10 @@ function getNodeWorker(fn, ...args) {
   `;
 }
 
-function createWorker(fn, ...args) {
+function workinator(fn, ...args) {
   if (typeof window === 'undefined') {
     const functionString = getNodeWorker(fn, ...args);
-    const { Worker } = require('worker_threads'); // eslint-disable-line
+    const { Worker } = eval('require')('worker_threads'); // eslint-disable-line
 
     return new Promise(resolve => {
       const worker = new Worker(functionString, { eval: true });
@@ -53,14 +53,4 @@ function createWorker(fn, ...args) {
   });
 }
 
-createWorker(
-  (a, b) => {
-    const start = Date.now();
-    while (Date.now() - start < 2000);
-    return a + b;
-  },
-  3,
-  9,
-).then(console.log);
-
-module.exports = createWorker;
+export default workinator
