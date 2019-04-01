@@ -9,3 +9,4 @@ lib
 output
 .psc-package
 .vscode
+.cache

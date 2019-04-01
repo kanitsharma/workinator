@@ -51,3 +51,23 @@ test('Error with promise', async t => {
     t.is(err, 'Intentional throwing');
   }
 });
+
+test('Multiple workers', async t => {
+  const value1 = await workinator(
+    () =>
+      new Promise(resolve => {
+        setTimeout(() => {
+          resolve(1000);
+        }, 2000);
+      }),
+  );
+  const value2 = await workinator(
+    () =>
+      new Promise(resolve => {
+        setTimeout(() => {
+          resolve(2000);
+        }, 2000);
+      }),
+  );
+  t.deepEqual([value1, value2], [1000, 2000]);
+});
