@@ -32,6 +32,7 @@ test('Delayed with promise', async t => {
 test('Error without promise', async t => {
   try {
     await workinator(() => {
+      // eslint-disable-next-line no-throw-literal
       throw 'Intentional throwing';
     });
   } catch (err) {
@@ -44,6 +45,7 @@ test('Error with promise', async t => {
     await workinator(
       () =>
         new Promise((_, reject) => {
+          // eslint-disable-next-line prefer-promise-reject-errors
           reject('Intentional throwing');
         }),
     );
