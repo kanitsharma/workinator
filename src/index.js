@@ -36,7 +36,18 @@ function getNodeWorker(fn, ...args) {
   `;
 }
 
-function reducer(action, resolve, reject) {
+function createJSFile (string) {
+  const blob = new Blob([string.replace('"use strict";', '')]); // eslint-disable-line no-undef
+
+  // eslint-disable-next-line no-undef
+  const blobURL = (window.URL ? URL : webkitURL).createObjectURL(blob, {
+    type: 'application/javascript; charset=utf-8',
+  });
+
+  return blobURL;
+}
+
+function resolver(action, resolve, reject) {
   switch (action.type) {
     case 'SUCCESS':
       return resolve(action.payload);
@@ -46,6 +57,7 @@ function reducer(action, resolve, reject) {
 }
 
 function workinator(fn, ...args) {
+  // NodeJS
   if (typeof window === 'undefined') {
     const functionString = getNodeWorker(fn, ...args);
     const { Worker } = eval('require')('worker_threads'); // eslint-disable-line
@@ -53,27 +65,24 @@ function workinator(fn, ...args) {
     return new Promise((resolve, reject) => {
       const worker = new Worker(functionString, { eval: true });
       worker.on('message', action => {
-        reducer(action, resolve, reject);
+        resolver(action, resolve, reject);
+        worker.terminate()
       });
     });
   }
 
-  const functionString = getJSWorker(fn, ...args);
-
-  const blob = new Blob([functionString.replace('"use strict";', '')]); // eslint-disable-line no-undef
-
-  // eslint-disable-next-line no-undef
-  const blobURL = (window.URL ? URL : webkitURL).createObjectURL(blob, {
-    type: 'application/javascript; charset=utf-8',
-  });
+  // Else in browser
+  const fileString = getJSWorker(fn, ...args);
+  const file = createJSFile(fileString);
 
   // eslint-disable-next-line no-undef
-  const worker = new Worker(blobURL);
+  const worker = new Worker(file);
 
   return new Promise((resolve, reject) => {
     worker.onmessage = ({ data: action }) => {
-      reducer(action, resolve, reject);
+      resolver(action, resolve, reject);
     };
+    worker.terminate()
   });
 }
 
