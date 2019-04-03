@@ -2,6 +2,18 @@
 
 <h1 align="center"> Workinator</h1>
 
+<p align="center">
+  <a href="https://github.com/prettier/prettier">
+        <img src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg" alt="prettier"/>
+  </a>
+<a href="https://github.com/rajatsharma/enginite">
+        <img src="https://img.shields.io/badge/enginite-generator-orange.svg" alt="enginite"/>
+  </a>
+  <a href="https://packagephobia.now.sh/result?p=@kimera/workinator">
+  <img src="https://packagephobia.now.sh/badge?p=@kimera/workinator" alt="workinator">
+  </a>
+</p>
+
 > Run your CPU intensive functions in a separate thread on the fly, and keep your application running at 60FPS.
 
 - Works on both Browser or Nodejs
