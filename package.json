@@ -8,6 +8,9 @@
   ],
   "license": "MIT",
   "enginite": "1.2.14",
+  "keywords": [
+    "workers", "performance", "javascript", "web-workers", "threads", "multithreading", "worker_threads"
+  ],
   "devDependencies": {
     "@enginite/libstarter": "1.0.2",
     "@hellpack/eslint-config-hellpack": "^2.2.0",
