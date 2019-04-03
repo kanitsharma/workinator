@@ -1,7 +1,11 @@
 {
   "name": "@kimera/workinator",
-  "version": "0.1.0",
-  "main": "index.js",
+  "version": "0.1.1",
+  "description": "Run your CPU intensive functions in a separate thread on the fly, and keep your application running at 60FPS.",
+  "main": "build/main.js",
+  "files": [
+    "build"
+  ],
   "license": "MIT",
   "enginite": "1.2.14",
   "devDependencies": {
