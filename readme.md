@@ -1,3 +1,5 @@
+<p align="center" ><img src="logo.png" width="200"/></p>
+
 # Workinator
 > Run your CPU intensive functions in a separate thread on the fly, and keep your application running at 60FPS.
 
