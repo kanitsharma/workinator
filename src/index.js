@@ -53,6 +53,8 @@ function resolver(action, resolve, reject) {
       return resolve(action.payload);
     case 'ERROR':
       return reject(action.payload);
+    default:
+      return reject('Error in payload');
   }
 }
 
@@ -83,7 +85,8 @@ function workinator(fn, ...args) {
     worker.onmessage = ({ data: action }) => {
       resolver(action, resolve, reject);
     };
-    worker.onerror = () => reject(new Error('There is some error in your worker'));
+    worker.onerror = () =>
+      reject(new Error('There is some error in your worker'));
     worker.terminate();
   });
 }
