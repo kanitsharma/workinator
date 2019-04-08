@@ -73,3 +73,17 @@ test('Multiple workers', async t => {
   );
   t.deepEqual([value1, value2], [1000, 2000]);
 });
+
+test('Closure Test', async t => {
+  const x = 1000;
+  const value1 = await workinator(
+    y =>
+      new Promise(resolve => {
+        setTimeout(() => {
+          resolve(y);
+        }, 2000);
+      }),
+    x,
+  );
+  t.is(value1, x);
+});
