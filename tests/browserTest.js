@@ -1,4 +1,4 @@
-import workinator from '../src/index';
+import workinator from '../build/main';
 
 const main = () => {
   workinator(() => {
