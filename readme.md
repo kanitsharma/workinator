@@ -1,4 +1,4 @@
-<p align="center" ><img src="logo.png" width="200"/></p>
+<p align="center" ><img src="docs/logo.png" width="200"/></p>
 
 <h1 align="center"> Workinator</h1>
 
@@ -21,6 +21,14 @@
 - Tiny package, ~1KB gzipped
 - Supports both synchronous or asynchronous code.
 - Automatically cleans up memory after worker thread is finished executing.
+
+## Getting Started
+
+```javascript
+  yarn add @kimera/workinator
+  // or
+  npm i @kimera/workinator
+```
 
 ## How it works
 ```javascript
