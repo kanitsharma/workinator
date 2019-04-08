@@ -70,7 +70,10 @@ function workinator(fn, ...args) {
         resolver(action, resolve, reject);
         worker.terminate();
       });
-      worker.on('error', reject);
+      worker.on('error', action => {
+        reject(action);
+        worker.terminate();
+      });
     });
   }
 
@@ -84,10 +87,12 @@ function workinator(fn, ...args) {
   return new Promise((resolve, reject) => {
     worker.onmessage = ({ data: action }) => {
       resolver(action, resolve, reject);
+      worker.terminate();
     };
-    worker.onerror = () =>
+    worker.onerror = () => {
       reject(new Error('There is some error in your worker'));
-    worker.terminate();
+      worker.terminate();
+    };
   });
 }
 

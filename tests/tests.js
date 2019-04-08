@@ -75,15 +75,12 @@ test('Multiple workers', async t => {
 });
 
 test('Closure Test', async t => {
-  const x = 1000;
-  const value1 = await workinator(
-    y =>
+  const val = await workinator(
+    () =>
       new Promise(resolve => {
-        setTimeout(() => {
-          resolve(y);
-        }, 2000);
+        resolve(1000);
       }),
-    x,
   );
-  t.is(value1, x);
+
+  t.is(val, 1000);
 });

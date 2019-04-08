@@ -31,23 +31,24 @@
 ```
 
 ## How it works
+
 ```javascript
-  import workinator from '@kimera/workinator';
+import workinator from '@kimera/workinator';
 
-  const work = () => {
-    // blocking thread for 2 secs
-    const start = new Date().getTime();
-    while (new Date().getTime() < start + 2000) { }
+const work = () => {
+  // blocking thread for 2 secs
+  const start = new Date().getTime();
+  while (new Date().getTime() < start + 2000) {}
 
-    return 'Work finished'
-  }
+  return 'Work finished';
+};
 
-  const main = async () => {
-    const status = await workinator(work);
-    console.log(status);
-  }
+const main = async () => {
+  const status = await workinator(work);
+  console.log(status);
+};
 
-  main()
+main();
 ```
 
 ### Thats it!.
@@ -55,20 +56,43 @@
 ## Async with promises
 
 ```javascript
-  import workinator from '@kimera/workinator';
+import workinator from '@kimera/workinator';
 
-  workinator(() => new Promise(resolve => {
-    setTimeout(() => {
-      resolve('Work Finished');
-    }, 2000)
-  })).then(console.log)
+workinator(
+  () =>
+    new Promise(resolve => {
+      setTimeout(() => {
+        resolve('Work Finished');
+      }, 2000);
+    }),
+).then(console.log);
 
-  // or
+// or
 
-  const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
-  workinator(async () => {
-    await sleep(2000);
-    return 'Work Finished';
-  }).then(console.log)
+workinator(async () => {
+  await sleep(2000);
+  return 'Work Finished';
+}).then(console.log);
+```
+
+## Using Dependencies
+
+Worker functions inside workerinator does not allow using closures, since its executed inside a different thread. So, instead what we can do is inject these dependencies as the second argument of workerinator and you will receive the dependencies as arguments inside worker function in their respective order.
+
+### Example
+
+```javascript
+import workinator from '@kimera/workinator';
+
+const log = x => console.log(x);
+
+workinator(
+  logger =>
+    new Promise(resolve => {
+      logger('Dependency working');
+    }),
+  log,
+)
 ```
