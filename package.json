@@ -17,6 +17,18 @@
     "multithreading",
     "worker_threads"
   ],
+  "author": {
+    "name": "Kanit Sharma",
+    "email": "kanitsharma@protonmail.com"
+  },
+  "bugs": {
+    "url": "https://github.com/kanitsharma/workinator/issues"
+  },
+  "homepage": "https://github.com/kanitsharma/workinator/blob/master/readme.md",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kanitsharma/workinator"
+  },
   "devDependencies": {
     "@enginite/libstarter": "1.0.2",
     "@hellpack/eslint-config-hellpack": "^2.2.0",
