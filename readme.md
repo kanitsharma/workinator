@@ -32,6 +32,18 @@
 
 ## How it works
 
+### Basic
+```javascript
+import workinator from '@kimera/workinator';
+
+workinator(() => {
+  console.log('Hello from worker');
+})
+
+// Thats it!.
+```
+
+### Synchronous
 ```javascript
 import workinator from '@kimera/workinator';
 
@@ -50,8 +62,6 @@ const main = async () => {
 
 main();
 ```
-
-### Thats it!.
 
 ## Async with promises
 
